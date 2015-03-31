@@ -677,9 +677,9 @@ void CvCascadeBoostTrainData::setData( const CvFeatureEvaluator* _featureEvaluat
 
     // set sample labels
     if (is_buf_16u)
-        udst = (unsigned short*)(buf->data.s + work_var_count*sample_count);
+        udst = (unsigned short*)(buf->data.s + (uint64)work_var_count*sample_count);
     else
-        idst = buf->data.i + work_var_count*sample_count;
+        idst = buf->data.i + (uint64)work_var_count*sample_count;
 
     for (int si = 0; si < sample_count; si++)
     {
@@ -1228,9 +1228,9 @@ void CvCascadeBoostTree::split_node_data( CvDTreeNode* node )
     if (data->is_buf_16u)
     {
         unsigned short *ldst = (unsigned short *)(buf->data.s + left->buf_idx*length_buf_row +
-            (workVarCount-1)*scount + left->offset);
+            (uint64)(workVarCount-1)*scount + left->offset);
         unsigned short *rdst = (unsigned short *)(buf->data.s + right->buf_idx*length_buf_row +
-            (workVarCount-1)*scount + right->offset);
+            (uint64)(workVarCount-1)*scount + right->offset);
 
         for( int i = 0; i < n; i++ )
         {
@@ -1251,9 +1251,9 @@ void CvCascadeBoostTree::split_node_data( CvDTreeNode* node )
     else
     {
         int *ldst = buf->data.i + left->buf_idx*length_buf_row +
-            (workVarCount-1)*scount + left->offset;
+            (uint64)(workVarCount-1)*scount + left->offset;
         int *rdst = buf->data.i + right->buf_idx*length_buf_row +
-            (workVarCount-1)*scount + right->offset;
+            (uint64)(workVarCount-1)*scount + right->offset;
 
         for( int i = 0; i < n; i++ )
         {
@@ -1281,9 +1281,9 @@ void CvCascadeBoostTree::split_node_data( CvDTreeNode* node )
     if (data->is_buf_16u)
     {
         unsigned short* ldst = (unsigned short*)(buf->data.s + left->buf_idx*length_buf_row +
-            workVarCount*scount + left->offset);
+            (uint64)workVarCount*scount + left->offset);
         unsigned short* rdst = (unsigned short*)(buf->data.s + right->buf_idx*length_buf_row +
-            workVarCount*scount + right->offset);
+            (uint64)workVarCount*scount + right->offset);
         for (int i = 0; i < n; i++)
         {
             unsigned short idx = (unsigned short)tempBuf[i];
@@ -1302,9 +1302,9 @@ void CvCascadeBoostTree::split_node_data( CvDTreeNode* node )
     else
     {
         int* ldst = buf->data.i + left->buf_idx*length_buf_row +
-            workVarCount*scount + left->offset;
+            (uint64)workVarCount*scount + left->offset;
         int* rdst = buf->data.i + right->buf_idx*length_buf_row +
-            workVarCount*scount + right->offset;
+            (uint64)workVarCount*scount + right->offset;
         for (int i = 0; i < n; i++)
         {
             int idx = tempBuf[i];
